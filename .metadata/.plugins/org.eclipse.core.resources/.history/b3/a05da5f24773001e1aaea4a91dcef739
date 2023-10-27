@@ -1,7 +1,0 @@
-package Task1;
-
-public class MyArrayListTest {
-	public static void main(String[] args) {
-		MyArrayList<E> myArrayList = new MyArrayList<E>();
-	}
-}
