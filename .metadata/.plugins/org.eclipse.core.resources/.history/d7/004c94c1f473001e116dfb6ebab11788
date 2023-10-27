@@ -1,0 +1,9 @@
+package Task2;
+
+public class Test {
+public static void main(String[] args) {
+	SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+	list.addFirst(1);
+	list.addFirst(2);
+}
+}

@@ -1,0 +1,161 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class MyArrayList<E> {
+    public static final int DEFAULT_CAPACITY = 10;
+    private Object[] elements; // Sử dụng một mảng Object để lưu trữ các phần tử
+    private int size;
+
+    public MyArrayList() {
+        this.elements = new Object[DEFAULT_CAPACITY];
+    }
+
+    public MyArrayList(int capacity) {
+        this.elements = new Object[capacity];
+    }
+
+    // Tạo một mảng mới với kích thước gấp đôi nếu mảng hiện tại đã đầy
+    public void growSize() {
+        int newCapacity = elements.length * 2;
+        elements = Arrays.copyOf(elements, newCapacity);
+    }
+
+    // Trả về số lượng phần tử trong danh sách
+    public int size() {
+        return size;
+    }
+
+    // Kiểm tra xem danh sách có rỗng không
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Trả về phần tử ở chỉ mục i
+    public E get(int i) throws IndexOutOfBoundsException {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (E) elements[i]; // Ép kiểu từ Object thành kiểu E
+    }
+
+    // Thay thế phần tử ở chỉ mục i bằng e, và trả về phần tử cũ
+    public E set(int i, E e) throws IndexOutOfBoundsException {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        E oldElement = (E) elements[i]; // Ép kiểu từ Object thành kiểu E
+        elements[i] = e;
+        return oldElement;
+    }
+
+    // Thêm một phần tử vào cuối danh sách
+    public boolean add(E e) {
+        if (size == elements.length) {
+            growSize();
+        }
+        elements[size] = e;
+        size++;
+        return true;
+    }
+
+    // Thêm một phần tử tại chỉ mục i, dịch chuyển các phần tử sau đó
+    public void add(int i, E e) throws IndexOutOfBoundsException {
+        if (i < 0 || i > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (size == elements.length) {
+            growSize();
+        }
+        for (int j = size; j > i; j--) {
+            elements[j] = elements[j - 1];
+        }
+        elements[i] = e;
+        size++;
+    }
+
+    // Xóa và trả về phần tử ở chỉ mục i, dịch chuyển các phần tử sau đó
+    public E remove(int i) throws IndexOutOfBoundsException {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        E removedElement = (E) elements[i]; // Ép kiểu từ Object thành kiểu E
+        for (int j = i; j < size - 1; j++) {
+            elements[j] = elements[j + 1];
+        }
+        elements[size - 1] = null; // Đặt phần tử cuối cùng là null
+        size--;
+        return removedElement;
+    }
+
+    // Xóa tất cả các phần tử trong danh sách
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
+        size = 0;
+    }
+
+    // Trả về chỉ mục cuối cùng của phần tử cụ thể, hoặc -1 nếu không có
+    public int lastIndexOf(Object o) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (o.equals(elements[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // Trả về một mảng chứa tất cả các phần tử trong danh sách
+    public E[] toArray() {
+        return Arrays.copyOf(Arrays.copyOf(elements, size), size);
+    }
+
+    // Tạo một bản sao nông cấu trúc của MyArrayList
+    public MyArrayList<E> clone() {
+        MyArrayList<E> clone = new MyArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            clone.add((E) elements[i]); // Ép kiểu từ Object thành kiểu E
+        }
+        return clone;
+    }
+
+    // Kiểm tra xem danh sách có chứa phần tử cụ thể không
+    public boolean contains(E o) {
+        for (int i = 0; i < size; i++) {
+            if (o.equals(elements[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Trả về chỉ mục đầu tiên của phần tử cụ thể, hoặc -1 nếu không có
+    public int indexOf(E o) {
+        for (int i = 0; i < size; i++) {
+            if (o.equals(elements[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // Xóa lần đầu tiên xuất hiện của phần tử cụ thể
+    public boolean remove(E e) {
+        int index = indexOf(e);
+        if (index != -1) {
+            remove(index);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Sắp xếp các phần tử dựa trên Comparator cụ thể hoặc bằng cách sử dụng natural ordering
+    public void sort(Comparator<E> c) {
+        if (c == null) {
+            Arrays.sort((E[]) elements, 0, size);
+        } else {
+            Arrays.sort((E[]) elements, 0, size, c);
+        }
+    }
+}

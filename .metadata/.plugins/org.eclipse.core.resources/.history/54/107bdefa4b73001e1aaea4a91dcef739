@@ -1,0 +1,73 @@
+package Task1;
+
+public class MyArrayListTest {
+
+    @Test
+    public void testSize() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        assertEquals(0, list.size());
+
+        list.add(1);
+        assertEquals(1, list.size());
+
+        list.remove(0);
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        assertEquals(true, list.isEmpty());
+
+        list.add(1);
+        assertEquals(false, list.isEmpty());
+
+        list.remove(0);
+        assertEquals(true, list.isEmpty());
+    }
+
+    @Test
+    public void testAdd() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        assertEquals(1, list.get(0));
+
+        list.add(2);
+        assertEquals(2, list.get(1));
+    }
+
+    @Test
+    public void testRemove() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        assertEquals(1, list.remove(0));
+        assertEquals(2, list.get(0));
+
+        assertEquals(2, list.remove(0));
+        assertEquals(true, list.isEmpty());
+    }
+
+    @Test
+    public void testContains() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        assertEquals(true, list.contains(1));
+        assertEquals(true, list.contains(2));
+        assertEquals(false, list.contains(3));
+    }
+
+    @Test
+    public void testIndexOf() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        assertEquals(0, list.indexOf(1));
+        assertEquals(1, list.indexOf(2));
+        assertEquals(-1, list.indexOf(3));
+    }
+}

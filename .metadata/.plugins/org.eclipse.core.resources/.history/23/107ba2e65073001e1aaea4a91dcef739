@@ -1,0 +1,78 @@
+package Task1;
+public class MyArrayListTest {
+    public static void main(String[] args) {
+        // Test the default constructor
+        MyArrayList<Integer> myList = new MyArrayList<>();
+        
+        // Test add method
+        myList.add(1);
+        myList.add(2);
+        myList.add(3);
+        myList.add(4);
+        
+        // Test size and isEmpty methods
+        System.out.println("Size of the list: " + myList.size());
+        System.out.println("Is the list empty? " + myList.isEmpty());
+        
+        // Test get method
+        System.out.println("Element at index 2: " + myList.get(2));
+        
+        // Test set method
+        myList.set(2, 5);
+        System.out.println("Updated element at index 2: " + myList.get(2));
+        
+        // Test add method with index
+        myList.add(1, 6);
+        System.out.println("Element at index 1 after adding: " + myList.get(1));
+        
+        // Test remove method
+        myList.remove(3);
+        System.out.println("Size of the list after removing element: " + myList.size());
+        
+        // Test clear method
+        myList.clear();
+        System.out.println("Size of the list after clearing: " + myList.size());
+        
+        // Test lastIndexOf method
+        myList.add(5);
+        myList.add(6);
+        myList.add(5);
+        System.out.println("Last index of element 5: " + myList.lastIndexOf(5));
+        
+        // Test toArray method
+        Integer[] array = myList.toArray();
+        System.out.println("Array elements: ");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+        
+        // Test clone method
+        MyArrayList<Integer> clonedList = myList.clone();
+        System.out.println("Is the cloned list the same as the original? " + myList.equals(clonedList));
+        
+        // Test contains method
+        System.out.println("Does the list contain 6? " + myList.contains(6));
+        
+        // Test indexOf method
+        System.out.println("Index of element 4: " + myList.indexOf(4));
+        
+        // Test remove method with element
+        myList.remove(6);
+        System.out.println("Size of the list after removing element: " + myList.size());
+        
+        // Test sorting
+        myList.add(3);
+        myList.add(1);
+        myList.add(2);
+        System.out.println("Before sorting: ");
+        for (int i = 0; i < myList.size(); i++) {
+            System.out.print(myList.get(i) + " ");
+        }
+        myList.sort(null); // Using natural ordering
+        System.out.println("\nAfter sorting: ");
+        for (int i = 0; i < myList.size(); i++) {
+            System.out.print(myList.get(i) + " ");
+        }
+    }
+}

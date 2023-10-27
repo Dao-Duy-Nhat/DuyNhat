@@ -1,0 +1,128 @@
+package Task2;
+
+import Task2.MyLinkedList.Node;
+
+public class SinglyLinkedList<E> {
+    private Node<E> head = null;
+    private Node<E> tail = null;
+    private int size;
+
+    public SinglyLinkedList() {
+        super();
+    }
+
+    // Returns the number of elements in the list.
+    public int size() {
+        return size;
+    }
+
+    // Returns true if the list is empty, and false
+    otherwise.
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Returns (but does not remove) the first element in
+    the list.
+    public E first() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return head.data;
+        }
+    }
+
+    // Returns (but does not remove) the last element in
+    the list.
+    public E last() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            return tail.data;
+        }
+    }
+
+    // Adds a new element to the front of the list.
+    public void addFirst(E e) {
+        Node<E> newNode = new Node<>(e);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        size++;
+    }
+
+    // Adds a new element to the end of the list.
+    public void addLast(E e) {
+        Node<E> newNode = new Node<>(e);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+
+    // Removes and returns the first element of the list.
+    public E removeFirst() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            Node<E> oldHead = head;
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            }
+            size--;
+            return oldHead.data;
+        }
+    }
+
+    // Removes and returns the last element of the list.
+    public E removeLast() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            Node<E> oldTail = tail;
+            if (head == tail) {
+                head = tail = null;
+            } else {
+                Node<E> newTail = head;
+                while (newTail.next != tail) {
+                    newTail = newTail.next;
+                }
+                tail = newTail;
+                tail.next = null;
+            }
+            size--;
+            return oldTail.data;
+        }
+    }
+
+    // Inserts a new element at the specified position in the list.
+    public void insert(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+
+        if (index == 0) {
+            addFirst(e);
+        } else if (index == size) {
+            addLast(e);
+        } else {
+            Node<E> newNode = new Node<>(e);
+            Node<E> prevNode = head;
+            for (int i = 0; i < index - 1; i++) {
+                prevNode = prevNode.next;
+            }
+            newNode.next = prevNode.next;
+            prevNode.next = newNode;
+            size++;
+        }
+    }
+
+   
+}

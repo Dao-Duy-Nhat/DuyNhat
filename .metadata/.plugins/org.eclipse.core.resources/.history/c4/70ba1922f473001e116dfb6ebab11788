@@ -1,0 +1,39 @@
+package Task2;
+
+import Task2.MyLinkedList.Node;
+
+public class SinglyLinkedList<E> {
+		private Node<E> head = null;
+		private Node<E> tail = null;
+		private int size;
+		public SinglyLinkedList() {
+		super();
+		}
+		// Returns the number of elements in the list.
+		public int size() {
+		return size;
+		}
+		
+		// Returns true if the list is empty, and false otherwise.
+		public boolean isEmpty() {
+		return size == 0;
+		}
+		
+		// Returns (but does not remove) the first element in the list.
+		public E first() {
+			
+		return first();
+		}
+
+		// Returns (but does not remove) the last element in the list.
+		public E last() {
+		return last();
+		
+		}
+		// Adds a new element to the front of the list.
+		public void addFirst(E e) {
+		  return;
+		}
+
+
+}

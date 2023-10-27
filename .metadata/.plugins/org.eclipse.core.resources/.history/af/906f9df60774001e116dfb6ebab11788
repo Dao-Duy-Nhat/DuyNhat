@@ -1,0 +1,16 @@
+package Task2;
+
+public class Test {
+public static void main(String[] args) {
+	SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+	list.addFirst(1);
+	list.addFirst(2);
+	list.addFirst(4);
+	list.addFirst(7);
+	System.out.println("Số phần tử trong danh sách: " + list.size());
+	System.out.println("Danh sách trống: " + list.isEmpty());
+	System.out.println("Phần tử đầu tiên trong danh sách: " + list.first());
+	System.out.println("Phần tử cuối cùng trong danh sách: " + list.last());
+	
+}
+}

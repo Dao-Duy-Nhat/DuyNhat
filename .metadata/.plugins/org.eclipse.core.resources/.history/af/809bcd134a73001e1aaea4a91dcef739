@@ -1,0 +1,33 @@
+package Task1;
+
+public class MyArrayList<E> {
+	public static final int DEFAULT_CAPACITY = 10;
+	private E[] elements;
+	private int size;
+	public MyArrayList() {
+	this.elements = (E[]) new Object[DEFAULT_CAPACITY];
+	}
+	public MyArrayList(int capacity) {
+	this.elements = (E[]) new Object[capacity];
+	}
+	// creates an array of double-size if the array of elements is full
+	public void growSize() {
+	    E[] newElements = (E[]) new Object[elements.length * 2];
+	    System.arraycopy(elements, 0, newElements, 0, elements.length);
+	    elements = newElements;
+	}
+	// Returns the number of elements in this list.
+	public int size() {
+	return size;
+	}
+	
+	// Returns whether the list is empty.
+	public boolean isEmpty() {
+		
+	return size == 0;
+	}
+
+	
+
+	}
+

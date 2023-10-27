@@ -1,0 +1,50 @@
+package Task2;
+
+public class SinglyLinkedList<E> {
+    private Node<E> head = null;
+    private Node<E> tail = null;
+    private int size;
+
+    public SinglyLinkedList() {
+        super();
+    }
+
+    // Returns the number of elements in the list.
+    public int size() {
+        return size;
+    }
+
+    // Returns true if the list is empty, and false otherwise.
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    // Returns (but does not remove) the first element in the list.
+    public E first() {
+        if (isEmpty()) {
+            return null; // Handle the case when the list is empty
+        }
+        return head.data;
+    }
+
+    // Returns (but does not remove) the last element in the list.
+    public E last() {
+        if (isEmpty()) {
+            return null; // Handle the case when the list is empty
+        }
+        return tail.data;
+    }
+
+    // Adds a new element to the front of the list.
+    public void addFirst(E e) {
+        Node<E> newNode = new Node<>(e);
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        size++;
+    }
+}

@@ -1,0 +1,107 @@
+package Task1;
+
+public class MyArrayList<E> {
+	public static final int DEFAULT_CAPACITY = 10;
+	private E[] elements;
+	private int size;
+
+	public MyArrayList() {
+		this.elements = (E[]) new Object[DEFAULT_CAPACITY];
+	}
+
+	public MyArrayList(int capacity) {
+		this.elements = (E[]) new Object[capacity];
+	}
+
+	// creates an array of double-size if the array of elements is full
+	public void growSize() {
+		E[] newElements = (E[]) new Object[elements.length * 2];
+		System.arraycopy(elements, 0, newElements, 0, elements.length);
+		elements = newElements;
+	}
+
+	// Returns the number of elements in this list.
+	public int size() {
+		return size;
+	}
+
+	// Returns whether the list is empty.
+	public boolean isEmpty() {
+
+		return size == 0;
+	}
+
+	// Returns (but does not remove) the element at index i.
+	public E get(int i) throws IndexOutOfBoundsException {
+		if (i < 0 || i >= size) {
+			throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+		}
+		return elements[i];
+	}
+	
+	// Replaces the element at index i with e, and returns the replaced element. ∗/
+	public E set(int i, E e) throws IndexOutOfBoundsException {
+		if (i < 0 || i >= size) {
+	        throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+	    }
+
+	    E oldElement = elements[i];
+	    elements[i] = e;
+	    return oldElement;
+	}
+	// It is used to append the specified element at the end of a list.
+	public boolean add(E e) {
+		if (size == elements.length) {
+	        growSize();
+	    }
+
+	    elements[size] = e;
+	    size++;
+	    return true;
+	}
+	// Inserts element e to be at index i, shifting all subsequent elements later.
+	public void add(int i, E e) throws IndexOutOfBoundsException {
+		if (i < 0 || i > size) {
+	        throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+	    }
+
+	    for (int j = size - 1; j >= i; j--) {
+	        elements[j + 1] = elements[j];
+	    }
+
+	    elements[i] = e;
+	    size++;
+	}
+	// Removes and returns the element at index i,shifting subsequent elements earlier.
+	public E remove(int i) throws IndexOutOfBoundsException {
+	    if (i < 0 || i >= size) {
+	        throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+	    }
+
+	    E oldElement = elements[i];
+
+	    for (int j = i; j < size - 1; j++) {
+	        elements[j] = elements[j + 1];
+	    }
+
+	    size--;
+
+	    return oldElement;
+	}
+	
+	// It is used to clear all elements in the list.
+	public void clear() {
+	    size = 0;
+	    for (int i = 0; i < elements.length; i++) {
+	        elements[i] = null;
+	    }
+	}
+	
+	// It is used to return the index in this list of the last occurrence of the specified element, or -1 if the list does not contain this element.
+	public int lastIndexOf(Object o) {
+	return -1;
+	}
+
+
+}
+

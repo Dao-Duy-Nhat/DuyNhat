@@ -1,0 +1,8 @@
+package Task1;
+
+public class MyArrayListTest {
+public static void main(String[] args) {
+	 MyArrayList<Integer> list = new MyArrayList<>();
+	 
+}
+}
