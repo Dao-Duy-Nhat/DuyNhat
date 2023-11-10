@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 public class MyWordCount {
 	// public static final String fileName = "data/hamlet.txt";
-	public static final String fileName = "fit.txt";
+	public static final String fileName = "data/fit.txt";
 
 
 	private List<String> words = new ArrayList<>();
@@ -69,40 +69,49 @@ public class MyWordCount {
 
 
 	// Prints out the number of times each unique token appears in the file
-	// data/hamlet.txt (or fit.txt) according ascending order of tokens
+	// data/hamlet.txt (or fit.txt) according ascending order of occurrences
 	// Example: An - 3, Bug - 10, ...
 	public Set<WordCount> printWordCounts() {
-		Set<WordCount> wordCounts = new TreeSet<>(new Comparator<WordCount>() {
+	    Set<WordCount> wordCounts = new TreeSet<>(new Comparator<WordCount>() {
 
-			@Override
-			public int compare(WordCount o1, WordCount o2) {
-				// TODO Auto-generated method stub
-				return o1.getWord().compareTo(o2.getWord());
-			}
-		});
-		
-		   wordCounts.addAll(this.getWordCounts());
-	    
-		return wordCounts;
+	        @Override
+	        public int compare(WordCount o1, WordCount o2) {
+	            // Compare based on counts in ascending order
+	            int countComparison = o1.getCount() - o2.getCount();
+	            if (countComparison == 0) {
+	                // If counts are equal, compare based on words in lexicographical order
+	                return o1.getWord().compareTo(o2.getWord());
+	            }
+	            return countComparison;
+	        }
+	    });
+
+	    wordCounts.addAll(this.getWordCounts());
+
+	    return wordCounts;
 	}
+
 
 	// Prints out the number of times each unique token appears in the file
 	// data/hamlet.txt (or fit.txt) according descending order of occurences
 	// Example: Bug - 10, An - 3, Nam - 2.
 	public Set<WordCount> exportWordCountsByOccurence() {
-		Set<WordCount> wordCounts = new TreeSet<>(new Comparator<WordCount>() {
+		   Set<WordCount> wordCounts = new TreeSet<>(new Comparator<WordCount>() {
 
-			@Override
-			public int compare(WordCount o1, WordCount o2) {
-			    int re = o1.getCount() - o2.getCount();
-			    if (re == 0) {
-					return o1.getWord().compareTo(o2.getWord());
-				}
-				return re;
-			}
-		});
-		wordCounts.addAll(this.getWordCounts());
-		return wordCounts;
+		        @Override
+		        public int compare(WordCount o1, WordCount o2) {
+		            // Compare based on counts in ascending order
+		            int countComparison = o2.getCount() - o1.getCount();
+		            if (countComparison == 0) {
+		                return o2.getWord().compareTo(o1.getWord());
+		            }
+		            return countComparison;
+		        }
+		    });
+
+		    wordCounts.addAll(this.getWordCounts());
+
+		    return wordCounts;
 	}
 
 	// delete words begining with the given pattern (i.e., delete words begin with 'A' letter
@@ -118,47 +127,5 @@ public class MyWordCount {
 	    return filteredWords;
 	}
 	
-	public static void main(String[] args) {
-		  // Create an instance of MyWordCount to load and process words from a file
-        MyWordCount wordCounter = new MyWordCount();
-
-        // Print the words and their counts
-        System.out.println("Word Counts:");
-        for (WordCount wordCount : wordCounter.getWordCounts()) {
-            System.out.println(wordCount.getWord() + " - " + wordCount.getCount());
-        }
-
-        // Print unique words
-        System.out.println("\nUnique Words:");
-        for (String uniqueWord : wordCounter.getUniqueWords()) {
-            System.out.println(uniqueWord);
-        }
-
-        // Print distinct words
-        System.out.println("\nDistinct Words:");
-        for (String distinctWord : wordCounter.getDistinctWords()) {
-            System.out.println(distinctWord);
-        }
-
-        // Print word counts in ascending order of words
-        System.out.println("\nWord Counts in Ascending Order of Words:");
-        for (WordCount wordCount : wordCounter.printWordCounts()) {
-            System.out.println(wordCount.getWord() + " - " + wordCount.getCount());
-        }
-
-        // Print word counts in descending order of occurrences
-        System.out.println("\nWord Counts in Descending Order of Occurrences:");
-        for (WordCount wordCount : wordCounter.exportWordCountsByOccurence()) {
-            System.out.println(wordCount.getWord() + " - " + wordCount.getCount());
-        }
-
-        // Filter words starting with 'A'
-        String filterPattern = "A";
-        System.out.println("\nWords after Filtering ('" + filterPattern + "' prefix removed):");
-        for (String filteredWord : wordCounter.filterWords(filterPattern)) {
-            System.out.println(filteredWord);
-        }
-    
-	}
 
 }
