@@ -1,4 +1,4 @@
-package Task_1;
+package CTDL;
 public class WordCount {
 	private String word;
 	private int count;
